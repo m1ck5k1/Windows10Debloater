@@ -18,7 +18,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 #no errors throughout
 $ErrorActionPreference = 'silentlycontinue'
 
-$DebloatFolder = "C:\Temp\Windows10Debloater"
+#$DebloatFolder = "C:\Temp\Windows10Debloater"
+$DebloatFolder = "C:\SnakeSpeareV6\engine\Windows10Debloater"
 If (Test-Path $DebloatFolder) {
     Write-Output "$DebloatFolder exists. Skipping."
 }
@@ -110,14 +111,14 @@ Function DebloatBlacklist {
         "*Dolby*"
              
         #Optional: Typically not removed but you can if you need to for some reason
-        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
-        #"*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
-        #"*Microsoft.BingWeather*"
-        #"*Microsoft.MSPaint*"
-        #"*Microsoft.MicrosoftStickyNotes*"
-        #"*Microsoft.Windows.Photos*"
-        #"*Microsoft.WindowsCalculator*"
-        #"*Microsoft.WindowsStore*"
+        "*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
+        "*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
+        "*Microsoft.BingWeather*"
+        "*Microsoft.MSPaint*"
+        "*Microsoft.MicrosoftStickyNotes*"
+        "*Microsoft.Windows.Photos*"
+        "*Microsoft.WindowsCalculator*"
+        "*Microsoft.WindowsStore*"
     )
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
@@ -158,7 +159,7 @@ Function Remove-Keys {
         "HKCR:\Extensions\ContractId\Windows.Protocol\PackageId\Microsoft.PPIProjection_10.0.15063.0_neutral_neutral_cw5n1h2txyewy"
         "HKCR:\Extensions\ContractId\Windows.Protocol\PackageId\Microsoft.XboxGameCallableUI_1000.15063.0.0_neutral_neutral_cw5n1h2txyewy"
         "HKCR:\Extensions\ContractId\Windows.Protocol\PackageId\Microsoft.XboxGameCallableUI_1000.16299.15.0_neutral_neutral_cw5n1h2txyewy"
-               
+        
         #Windows Share Target
         "HKCR:\Extensions\ContractId\Windows.ShareTarget\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
     )
@@ -753,10 +754,10 @@ Function Restore3dObjects {
     }
 }
 
-#Function DisableLastUsedFilesAndFolders {
-#	Write-Host = "Disable Explorer to show last used files and folders."
-#	Invoke-Item (start powershell ((Split-Path $MyInvocation.InvocationName) + "\Individual Scripts\Disable Last Used Files and Folders View.ps1"))
-#}
+Function DisableLastUsedFilesAndFolders {
+	Write-Host = "Disable Explorer to show last used files and folders."
+	Invoke-Item (start powershell ((Split-Path $MyInvocation.InvocationName) + "\Individual Scripts\Disable Last Used Files and Folders View.ps1"))
+}
 
 #Interactive prompt Debloat/Revert options
 $Button = [Windows.MessageBoxButton]::YesNoCancel
